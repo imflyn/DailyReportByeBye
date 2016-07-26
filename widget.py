@@ -1,6 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTextEdit, QLabel, QApplication, QDesktopWidget, \
-    QPushButton, QSpacerItem
+    QPushButton, QSpacerItem, QMessageBox
+from PyQt5.QtCore import QCoreApplication
 
 
 class MailUI(QWidget):
@@ -54,6 +55,21 @@ class MailUI(QWidget):
 
     def set_send_listener(self, listener):
         self.btn_send.clicked.connect(listener)
+
+    def show_info_message_box(self, title: str, content: str, callback):
+        reply = QMessageBox.information(self, title, content, QMessageBox.Ok)
+        if reply == QMessageBox.Ok:
+            callback()
+
+    def show_question_message_box(self, title: str, content: str, positive_clicked, negative_clicked):
+        reply = QMessageBox.information(self, title, content, QMessageBox.Yes | QMessageBox.Cancel)
+        if reply == QMessageBox.Yes:
+            positive_clicked()
+        elif reply == QMessageBox.Cancel:
+            negative_clicked()
+
+    def close_self(self):
+        QCoreApplication.instance().quit()
 
 
 if __name__ == '__main__':
