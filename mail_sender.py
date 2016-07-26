@@ -20,8 +20,8 @@ class MailSender(object):
         msg['To'] = self.to_address
         msg['Subject'] = Header(self.title, 'utf-8')
 
+        server = smtplib.SMTP(self.smtp_server, self.smtp_server_port)
         try:
-            server = smtplib.SMTP(self.smtp_server, self.smtp_server_port)
             server.set_debuglevel(1)
             server.login(self.from_address, self.password)
             server.sendmail(self.from_address, self.to_address, msg.as_string())
