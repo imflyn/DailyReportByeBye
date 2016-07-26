@@ -1,5 +1,6 @@
 import sys
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTextEdit, QLabel, QApplication, QDesktopWidget, QPushButton, QSpacerItem
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTextEdit, QLabel, QApplication, QDesktopWidget, \
+    QPushButton, QSpacerItem
 
 
 class MailUI(QWidget):
@@ -29,6 +30,7 @@ class MailUI(QWidget):
         space2 = QSpacerItem(0, 0)
         self.btn_send.setText("Send")
         self.btn_send.setMinimumHeight(48)
+
         send_layout.addItem(space2)
         send_layout.addWidget(self.btn_send)
 
@@ -39,18 +41,28 @@ class MailUI(QWidget):
         father_layout.addLayout(send_layout)
         self.setLayout(father_layout)
 
-    def show(self):
+    def show(self, title: str, content: str):
         self.resize(500, 400)
         qr = self.frameGeometry()
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
         self.setWindowTitle('Daily Report Bye Bye')
+        self.te_title.setText(title)
+        self.te_content.setText(content)
         super().show()
+
+    def set_send_listener(self, listener):
+        self.btn_send.clicked.connect(listener)
 
 
 if __name__ == '__main__':
+    def click_listener():
+        print('hello world')
+
+
     app = QApplication(sys.argv)
-    notepad = MailUI()
-    notepad.show()
+    mail_ui = MailUI()
+    mail_ui.set_send_listener(click_listener)
+    mail_ui.show("Hello", "World")
     app.exec_()

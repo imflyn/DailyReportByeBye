@@ -13,7 +13,7 @@ class MailSender(object):
         self.smtp_server_port = ''
         self.title = ''
 
-    def send(self, content):
+    def send(self, content: str):
         msg = MIMEText(content, 'plain', 'utf-8')
         from_address = self.my_name + '<' + self.from_address + '>'
         msg['From'] = from_address
