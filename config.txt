@@ -5,6 +5,6 @@ password =
 to_address = mail_cat@163.com
 smtp_server = smtp.126.com
 smtp_server_port = 25
-
+path =
 
 
