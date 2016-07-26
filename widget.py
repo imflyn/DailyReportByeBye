@@ -49,7 +49,8 @@ class MailUI(QWidget):
         super().show()
 
 
-app = QApplication(sys.argv)
-notepad = MailUI()
-notepad.show()
-app.exec_()
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    notepad = MailUI()
+    notepad.show()
+    app.exec_()
