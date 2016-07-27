@@ -13,7 +13,7 @@ def save_commit_logs(path_list: list, author: str, callback) -> list:
     #     os.system(cmd)
     for value, path in enumerate(path_list):
         cmd = "cd " + path + \
-              "& git log --author=\"" + author + "\" --since=\"24hours\" --all > " + log_file_path % str(value + 1)
+              "& git log --author=\"" + author + "\" --since=\"12hours\" --all > " + log_file_path % str(value + 1)
         cmd_result = os.popen(cmd).readlines()
         print("CMD result%s" % cmd_result)
     if callback is not None:

@@ -52,8 +52,9 @@ def send_listener():
     mail_content = mail_ui.te_content.toPlainText()
     mail_sender.send(mail_title, mail_content,
                      lambda: mail_ui.show_info_message_box('Info', '发送成功!', lambda: mail_ui.close_self()),
-                     lambda: mail_ui.show_question_message_box('Warning', '发送失败,是否重新发送!', send_listener,
-                                                               lambda: mail_ui.close_self())
+                     lambda exception: mail_ui.show_question_message_box('Warning', exception + '\n' + '发送失败,是否重新发送?',
+                                                                         send_listener,
+                                                                         lambda: mail_ui.close_self())
                      )
 
 

@@ -27,6 +27,6 @@ class MailSender(object):
             success_callback()
         except Exception as e:
             print(e)
-            failed_callback()
+            failed_callback(str(e.args))
         finally:
             server.quit()
