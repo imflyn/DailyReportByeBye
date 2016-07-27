@@ -2,20 +2,21 @@ import os, shutil
 
 log_folder_path = os.path.dirname(os.path.realpath(__file__)) + "\git_logs"
 log_file_path = log_folder_path + "\git_log_" + "%s.txt"
+project_path = os.path.dirname(os.path.realpath(__file__))
 
 
 def save_commit_logs(path_list: list, author: str, callback) -> list:
-    if os.path.exists("git_logs"):
-        shutil.rmtree("git_logs")
-    os.mkdir("git_logs")
+    if os.path.exists(project_path + "\\git_logs"):
+        shutil.rmtree(project_path + "\\git_logs")
+    os.mkdir(project_path + "\\git_logs")
     # for path in paths:
     #     cmd = "cd " + path + " & git fetch "
     #     os.system(cmd)
     for value, path in enumerate(path_list):
-        cmd = "cd " + path + \
-              "& git log --author=\"" + author + "\" --since=\"12hours\" --all > " + log_file_path % str(value + 1)
-        cmd_result = os.popen(cmd).readlines()
-        print("CMD result%s" % cmd_result)
+        cmd = path[0:2] + " & cd " + path + \
+              " & git log --author=\"" + author + "\" --since=\"16hours\" --all > " + log_file_path % str(value + 1)
+        print(cmd)
+        os.popen(cmd)
     if callback is not None:
         return callback()
 

@@ -1,6 +1,7 @@
 import time
 import sys
 import git
+import os
 from widget import MailUI
 import configparser
 from PyQt5.QtWidgets import QApplication
@@ -27,7 +28,7 @@ date = time.strftime('%Y%m%d', time.localtime(time.time()))
 title = 'Daily_Report_Flyn_%s' % date
 
 configparser = configparser.ConfigParser()
-configparser.read('config.txt')
+configparser.read(os.path.dirname(os.path.realpath(__file__)) + '\\config.txt')
 
 mail_sender = MailSender()
 
