@@ -20,6 +20,7 @@ class MailSender(object):
         msg['Subject'] = Header(title, 'utf-8')
 
         server = smtplib.SMTP(self.smtp_server, self.smtp_server_port)
+        server.set_debuglevel(1)
         try:
             server.login(self.from_address, self.password)
             server.sendmail(self.from_address, self.to_address, msg.as_string())
