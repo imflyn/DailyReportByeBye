@@ -1,1 +1,1 @@
-# DailyReportByeBye
+收集一天的Git日志，生成发送邮件的内容。根据配置发送邮件。
