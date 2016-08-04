@@ -19,22 +19,25 @@ def save_commit_logs(path_list: list, author: str, callback) -> list:
 		print(cmd)
 		os.popen(cmd)
 	if callback is not None:
-		sleep(5)
+		sleep(3)
 		return callback()
 
 
 def read_commit_logs() -> list:
 	commit_logs = []
 	for filename in os.listdir(log_folder_path):
-		file = open(log_folder_path + '\\' + filename)
-		lines = file.readlines()
-		for line in lines:
-			if filter_log(line) is False:
-				continue
-			elif line.startswith(" "):
-				if line.endswith("\n"):
-					line = line[4:-1]
-				commit_logs.append(line)
+		file = open(log_folder_path + '\\' + filename, encoding='utf-8')
+		try:
+			lines = file.readlines()
+			for line in lines:
+				if filter_log(line) is False:
+					continue
+				elif line.startswith(" "):
+					if line.endswith("\n"):
+						line = line[4:-1]
+					commit_logs.append(line)
+		except Exception as e:
+			print(e)
 	return commit_logs
 
 
